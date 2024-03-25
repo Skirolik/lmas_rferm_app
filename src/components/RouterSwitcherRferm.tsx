@@ -13,8 +13,8 @@ const RouterSwitcherRferm = ({ backcolor }) => {
       <Route path="/" element={<HomeRferm back={backcolor} />} />
       <Route path="/details" element={<PitDetails back={backcolor} />} />
       <Route path="/settings" element={<Settings back={backcolor} />} />
-      <Route path="/maintenance" element={<Maintenace />} />
-      <Route path="/earthpit" element={<Earthpit_data />} />
+      <Route path="/maintenance" element={<Maintenace back={backcolor} />} />
+      <Route path="/earthpit" element={<Earthpit_data back={backcolor} />} />
     </Routes>
   );
 };

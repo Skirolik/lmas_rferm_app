@@ -2,7 +2,7 @@ import { Group, Paper, SimpleGrid, Text } from "@mantine/core";
 import React from "react";
 
 const IndividualCard = ({ color, data }) => {
-  console.log("data for individual cards", data);
+  //   console.log("data for individual cards", data);
   if (!data) {
     return <Paper p="md">Loading...</Paper>; // Or a custom message
   }
@@ -40,8 +40,8 @@ const CommonCards = ({ data }) => {
   if (!data) {
     return <p>Data is not available yet.</p>;
   }
-  console.log("data in common cards", data);
-  const colors = ["#c51d31", "#d14d14", "#24782c", "#1dbac5", "#1dbac5"];
+  //   console.log("data in common cards", data);
+  const colors = ["#c51d31", "#d14d14", "#24782c", "#1dbac5", "#cf9a14"];
 
   return (
     <SimpleGrid cols={{ base: 1, xs: 2, md: 5 }}>

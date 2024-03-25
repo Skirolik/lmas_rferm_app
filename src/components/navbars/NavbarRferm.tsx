@@ -13,7 +13,7 @@ import {
   Flex,
   Drawer,
 } from "@mantine/core";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import {
   IconSettings,
@@ -29,6 +29,7 @@ import { getTextColor } from "../utils";
 
 export const NavbarRferm = ({ Onlogout, back }) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const isLargeScreen = useMediaQuery("(min-width:800px");
   const computedColorScheme = useComputedColorScheme("light");
   const { colorScheme } = useMantineColorScheme();
@@ -63,9 +64,11 @@ export const NavbarRferm = ({ Onlogout, back }) => {
             >
               <NavLink
                 key="Home"
-                className={`NavLink-custom ${
-                  colorScheme === "light" ? "light" : "dark"
-                }`}
+                style={{
+                  color: pathname === "/" ? "#087f5b" : "inherit",
+                  backgroundColor:
+                    pathname === "/" ? "rgba(8, 127, 91, 0.1)" : "inherit",
+                }}
                 label={
                   <div style={{ textAlign: "center" }}>
                     <IconHome
@@ -85,9 +88,13 @@ export const NavbarRferm = ({ Onlogout, back }) => {
               />
               <NavLink
                 key="Detials"
-                className={`NavLink-custom ${
-                  colorScheme === "light" ? "light" : "dark"
-                }`}
+                style={{
+                  color: pathname === "/details" ? "#087f5b" : "inherit",
+                  backgroundColor:
+                    pathname === "/details"
+                      ? "rgba(8, 127, 91, 0.1)"
+                      : "inherit",
+                }}
                 label={
                   <div style={{ textAlign: "center" }}>
                     <IconDetails
@@ -129,9 +136,13 @@ export const NavbarRferm = ({ Onlogout, back }) => {
               />
               <NavLink
                 key="Maintenance"
-                className={`NavLink-custom ${
-                  colorScheme === "light" ? "light" : "dark"
-                }`}
+                style={{
+                  color: pathname === "/maintenance" ? "#087f5b" : "inherit",
+                  backgroundColor:
+                    pathname === "/maintenance"
+                      ? "rgba(8, 127, 91, 0.1)"
+                      : "inherit",
+                }}
                 label={
                   <div style={{ textAlign: "center" }}>
                     <IconLayoutKanban
@@ -151,9 +162,13 @@ export const NavbarRferm = ({ Onlogout, back }) => {
               />
               <NavLink
                 key="Layout"
-                className={`NavLink-custom ${
-                  colorScheme === "light" ? "light" : "dark"
-                }`}
+                style={{
+                  color: pathname === "/earthpit" ? "#087f5b" : "inherit",
+                  backgroundColor:
+                    pathname === "/earthpit"
+                      ? "rgba(8, 127, 91, 0.1)"
+                      : "inherit",
+                }}
                 label={
                   <div style={{ textAlign: "center" }}>
                     <IconMapPin
@@ -216,9 +231,11 @@ export const NavbarRferm = ({ Onlogout, back }) => {
               <AppShell.Section>
                 <NavLink
                   key="Home"
-                  className={`NavLink-custom ${
-                    colorScheme === "light" ? "light" : "dark"
-                  }`}
+                  style={{
+                    color: pathname === "/" ? "#087f5b" : "inherit",
+                    backgroundColor:
+                      pathname === "/" ? "rgba(8, 127, 91, 0.1)" : "inherit",
+                  }}
                   label={
                     <div style={{ textAlign: "center" }}>
                       <IconHome
@@ -241,9 +258,13 @@ export const NavbarRferm = ({ Onlogout, back }) => {
                 />
                 <NavLink
                   key="Detials"
-                  className={`NavLink-custom ${
-                    colorScheme === "light" ? "light" : "dark"
-                  }`}
+                  style={{
+                    color: pathname === "/detials" ? "#087f5b" : "inherit",
+                    backgroundColor:
+                      pathname === "/details"
+                        ? "rgba(8, 127, 91, 0.1)"
+                        : "inherit",
+                  }}
                   label={
                     <div style={{ textAlign: "center" }}>
                       <IconDetails
@@ -266,9 +287,13 @@ export const NavbarRferm = ({ Onlogout, back }) => {
                 />
                 <NavLink
                   key="users"
-                  className={`NavLink-custom ${
-                    colorScheme === "light" ? "light" : "dark"
-                  }`}
+                  style={{
+                    color: pathname === "/details" ? "#087f5b" : "inherit",
+                    backgroundColor:
+                      pathname === "/details"
+                        ? "rgba(8, 127, 91, 0.1)"
+                        : "inherit",
+                  }}
                   label={
                     <div style={{ textAlign: "center" }}>
                       <IconUsersGroup
@@ -291,9 +316,13 @@ export const NavbarRferm = ({ Onlogout, back }) => {
                 />
                 <NavLink
                   key="Maintenance"
-                  className={`NavLink-custom ${
-                    colorScheme === "light" ? "light" : "dark"
-                  }`}
+                  style={{
+                    color: pathname === "/maintenance" ? "#087f5b" : "inherit",
+                    backgroundColor:
+                      pathname === "/maintenance"
+                        ? "rgba(8, 127, 91, 0.1)"
+                        : "inherit",
+                  }}
                   label={
                     <div style={{ textAlign: "center" }}>
                       <IconLayoutKanban
@@ -316,9 +345,13 @@ export const NavbarRferm = ({ Onlogout, back }) => {
                 />
                 <NavLink
                   key="Layout"
-                  className={`NavLink-custom ${
-                    colorScheme === "light" ? "light" : "dark"
-                  }`}
+                  style={{
+                    color: pathname === "/earthpit" ? "#087f5b" : "inherit",
+                    backgroundColor:
+                      pathname === "/earthpit"
+                        ? "rgba(8, 127, 91, 0.1)"
+                        : "inherit",
+                  }}
                   label={
                     <div style={{ textAlign: "center" }}>
                       <IconMapPin

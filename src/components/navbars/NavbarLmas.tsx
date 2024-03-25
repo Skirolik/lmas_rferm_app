@@ -13,7 +13,7 @@ import {
   Flex,
   Drawer,
 } from "@mantine/core";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import {
   IconSettings,
@@ -26,8 +26,11 @@ import {
   IconArrowBarRight,
 } from "@tabler/icons-react";
 import { getTextColor } from "../utils";
+import styles from "./Navbar.module.css";
 
 export const NavbarLmas = ({ Onlogout, back }) => {
+  const { pathname } = useLocation();
+  console.log("pathname", pathname);
   const navigate = useNavigate();
   const isLargeScreen = useMediaQuery("(min-width:800px");
   const computedColorScheme = useComputedColorScheme("light");
@@ -61,9 +64,11 @@ export const NavbarLmas = ({ Onlogout, back }) => {
             >
               <NavLink
                 key="Home"
-                className={`NavLink-custom ${
-                  colorScheme === "light" ? "light" : "dark"
-                }`}
+                style={{
+                  color: pathname === "/" ? "#087f5b" : "inherit",
+                  backgroundColor:
+                    pathname === "/" ? "rgba(8, 127, 91, 0.1)" : "inherit",
+                }}
                 label={
                   <div style={{ textAlign: "center" }}>
                     <IconHome
@@ -82,13 +87,17 @@ export const NavbarLmas = ({ Onlogout, back }) => {
                 onClick={() => navigate("../")}
               />
               <NavLink
-                key="Detials"
-                className={`NavLink-custom ${
-                  colorScheme === "light" ? "light" : "dark"
-                }`}
+                key="Maintenance"
+                style={{
+                  color: pathname === "/maintenance" ? "#087f5b" : "inherit",
+                  backgroundColor:
+                    pathname === "/maintenance"
+                      ? "rgba(8, 127, 91, 0.1)"
+                      : "inherit",
+                }}
                 label={
                   <div style={{ textAlign: "center" }}>
-                    <IconDetails
+                    <IconLayoutKanban
                       width={20}
                       height={20}
                       style={{ marginBottom: "5px" }}
@@ -97,17 +106,44 @@ export const NavbarLmas = ({ Onlogout, back }) => {
                       size="sm"
                       style={{ lineHeight: "1", fontSize: "0.8em" }}
                     >
-                      Details
+                      Board
                     </Text>
                   </div>
                 }
-                onClick={() => navigate("../calendar")}
+                onClick={() => navigate("../maintenance")}
+              />
+              <NavLink
+                key="Layout"
+                style={{
+                  color: pathname === "/earthpit" ? "#087f5b" : "inherit",
+                  backgroundColor:
+                    pathname === "/earthpit"
+                      ? "rgba(8, 127, 91, 0.1)"
+                      : "inherit",
+                }}
+                label={
+                  <div style={{ textAlign: "center" }}>
+                    <IconMapPin
+                      width={20}
+                      height={20}
+                      style={{ marginBottom: "5px" }}
+                    />
+                    <Text
+                      size="md"
+                      style={{ lineHeight: "1", fontSize: "0.8em" }}
+                    >
+                      Layout
+                    </Text>
+                  </div>
+                }
+                onClick={() => navigate("../earthpit")}
               />
             </AppShell.Section>
             <div style={{ position: "absolute", bottom: 30, width: "100%" }}>
               <AppShell.Section mt="xl">
                 <Center>
                   <Avatar
+                    style={{ cursor: "pointer" }}
                     color="teal"
                     radius="xl"
                     mt="xl"
@@ -153,9 +189,11 @@ export const NavbarLmas = ({ Onlogout, back }) => {
               >
                 <NavLink
                   key="Home"
-                  className={`NavLink-custom ${
-                    colorScheme === "light" ? "light" : "dark"
-                  }`}
+                  style={{
+                    color: pathname === "/" ? "#087f5b" : "inherit",
+                    backgroundColor:
+                      pathname === "/" ? "rgba(8, 127, 91, 0.1)" : "inherit",
+                  }}
                   label={
                     <div style={{ textAlign: "center" }}>
                       <IconHome
@@ -172,15 +210,18 @@ export const NavbarLmas = ({ Onlogout, back }) => {
                     </div>
                   }
                   onClick={() => {
-                    navigate("../");
-                    toggleDrawer();
+                    navigate("../"), toggleDrawer();
                   }}
                 />
                 <NavLink
                   key="Detials"
-                  className={`NavLink-custom ${
-                    colorScheme === "light" ? "light" : "dark"
-                  }`}
+                  style={{
+                    color: pathname === "/calendar" ? "#087f5b" : "inherit",
+                    backgroundColor:
+                      pathname === "/calendar"
+                        ? "rgba(8, 127, 91, 0.1)"
+                        : "inherit",
+                  }}
                   label={
                     <div style={{ textAlign: "center" }}>
                       <IconDetails
@@ -197,7 +238,64 @@ export const NavbarLmas = ({ Onlogout, back }) => {
                     </div>
                   }
                   onClick={() => {
-                    navigate("../calendar");
+                    navigate("../calendar"), toggleDrawer();
+                  }}
+                />
+                <NavLink
+                  key="Maintenance"
+                  style={{
+                    color: pathname === "/maintenance" ? "#087f5b" : "inherit",
+                    backgroundColor:
+                      pathname === "/maintenance"
+                        ? "rgba(8, 127, 91, 0.1)"
+                        : "inherit",
+                  }}
+                  label={
+                    <div style={{ textAlign: "center" }}>
+                      <IconLayoutKanban
+                        width={20}
+                        height={20}
+                        style={{ marginBottom: "5px" }}
+                      />
+                      <Text
+                        size="md"
+                        style={{ lineHeight: "1", fontSize: "0.8em" }}
+                      >
+                        Board
+                      </Text>
+                    </div>
+                  }
+                  onClick={() => {
+                    navigate("../maintenance");
+                    toggleDrawer();
+                  }}
+                />
+                <NavLink
+                  key="Layout"
+                  style={{
+                    color: pathname === "/earthpit" ? "#087f5b" : "inherit",
+                    backgroundColor:
+                      pathname === "/earthpit"
+                        ? "rgba(8, 127, 91, 0.1)"
+                        : "inherit",
+                  }}
+                  label={
+                    <div style={{ textAlign: "center" }}>
+                      <IconMapPin
+                        width={20}
+                        height={20}
+                        style={{ marginBottom: "5px" }}
+                      />
+                      <Text
+                        size="md"
+                        style={{ lineHeight: "1", fontSize: "0.8em" }}
+                      >
+                        Layout
+                      </Text>
+                    </div>
+                  }
+                  onClick={() => {
+                    navigate("../earthpit");
                     toggleDrawer();
                   }}
                 />
@@ -209,6 +307,7 @@ export const NavbarLmas = ({ Onlogout, back }) => {
                     color="teal"
                     radius="xl"
                     mt="xl"
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                       navigate("../settings");
                       toggleDrawer();
