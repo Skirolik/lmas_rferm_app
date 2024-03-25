@@ -6,12 +6,14 @@ import {
   IconSettings,
 } from "@tabler/icons-react";
 import { getTextColor } from "./components/utils";
+import Device_details from "./components/common/Device_details";
+import Device_entries from "./components/common/Device_entries";
 
 const Earthpit_data = ({ back }) => {
   const iconStyle = { width: rem(12), height: rem(12) };
   return (
     <div>
-      <Tabs defaultValue="entry">
+      <Tabs defaultValue="entry" variant="outline">
         <Tabs.List>
           <Tabs.Tab
             value="entry"
@@ -29,10 +31,10 @@ const Earthpit_data = ({ back }) => {
           </Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel pt="xs" value="entry">
-          <Text>Hellow </Text>
+          <Device_details />
         </Tabs.Panel>
         <Tabs.Panel pt="xs" value="details">
-          <Text>Hellow </Text>
+          <Device_entries back={back} />
         </Tabs.Panel>
       </Tabs>
     </div>
