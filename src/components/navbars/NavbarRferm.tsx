@@ -12,6 +12,7 @@ import {
   Image,
   Flex,
   Drawer,
+  Tooltip,
 } from "@mantine/core";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
@@ -71,17 +72,26 @@ export const NavbarRferm = ({ Onlogout, back }) => {
                 }}
                 label={
                   <div style={{ textAlign: "center" }}>
-                    <IconHome
-                      width={20}
-                      height={20}
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <Text
+                    <Tooltip
+                      label="Home"
+                      position="right-end"
+                      offset={10}
+                      withArrow
+                      arrowOffset={12}
+                    >
+                      <IconHome
+                        width={25}
+                        height={25}
+                        style={{ marginBottom: "5px", marginTop: "10px" }}
+                      />
+                    </Tooltip>
+
+                    {/* <Text
                       size="sm"
                       style={{ lineHeight: "1", fontSize: "0.8em" }}
                     >
                       Home
-                    </Text>
+                    </Text> */}
                   </div>
                 }
                 onClick={() => navigate("../")}
@@ -97,17 +107,19 @@ export const NavbarRferm = ({ Onlogout, back }) => {
                 }}
                 label={
                   <div style={{ textAlign: "center" }}>
-                    <IconDetails
-                      width={20}
-                      height={20}
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <Text
-                      size="sm"
-                      style={{ lineHeight: "1", fontSize: "0.8em" }}
+                    <Tooltip
+                      label="Pit Detials"
+                      position="right-end"
+                      offset={10}
+                      withArrow
+                      arrowOffset={12}
                     >
-                      Details
-                    </Text>
+                      <IconDetails
+                        width={25}
+                        height={25}
+                        style={{ marginBottom: "5px", marginTop: "10px" }}
+                      />
+                    </Tooltip>
                   </div>
                 }
                 onClick={() => navigate("../details")}
@@ -119,17 +131,19 @@ export const NavbarRferm = ({ Onlogout, back }) => {
                 }`}
                 label={
                   <div style={{ textAlign: "center" }}>
-                    <IconUsersGroup
-                      width={20}
-                      height={20}
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <Text
-                      size="sm"
-                      style={{ lineHeight: "1", fontSize: "0.8em" }}
+                    <Tooltip
+                      label="Users"
+                      position="right-end"
+                      offset={10}
+                      withArrow
+                      arrowOffset={12}
                     >
-                      Users
-                    </Text>
+                      <IconUsersGroup
+                        width={25}
+                        height={25}
+                        style={{ marginBottom: "5px", marginTop: "10px" }}
+                      />
+                    </Tooltip>
                   </div>
                 }
                 onClick={() => navigate("../details")}
@@ -145,17 +159,19 @@ export const NavbarRferm = ({ Onlogout, back }) => {
                 }}
                 label={
                   <div style={{ textAlign: "center" }}>
-                    <IconLayoutKanban
-                      width={20}
-                      height={20}
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <Text
-                      size="md"
-                      style={{ lineHeight: "1", fontSize: "0.8em" }}
+                    <Tooltip
+                      label="Board"
+                      position="right-end"
+                      offset={10}
+                      withArrow
+                      arrowOffset={12}
                     >
-                      Board
-                    </Text>
+                      <IconLayoutKanban
+                        width={25}
+                        height={25}
+                        style={{ marginBottom: "5px", marginTop: "10px" }}
+                      />
+                    </Tooltip>
                   </div>
                 }
                 onClick={() => navigate("../maintenance")}
@@ -171,17 +187,19 @@ export const NavbarRferm = ({ Onlogout, back }) => {
                 }}
                 label={
                   <div style={{ textAlign: "center" }}>
-                    <IconMapPin
-                      width={20}
-                      height={20}
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <Text
-                      size="md"
-                      style={{ lineHeight: "1", fontSize: "0.8em" }}
+                    <Tooltip
+                      label="Pit layout"
+                      position="right-end"
+                      offset={10}
+                      withArrow
+                      arrowOffset={12}
                     >
-                      Layout
-                    </Text>
+                      <IconMapPin
+                        width={25}
+                        height={25}
+                        style={{ marginBottom: "5px", marginTop: "10px" }}
+                      />
+                    </Tooltip>
                   </div>
                 }
                 onClick={() => navigate("../earthpit")}
@@ -190,25 +208,41 @@ export const NavbarRferm = ({ Onlogout, back }) => {
             <div style={{ position: "absolute", bottom: 30, width: "100%" }}>
               <AppShell.Section mt="xl">
                 <Center>
-                  <Avatar
-                    color="teal"
-                    radius="xl"
-                    mt="xl"
-                    onClick={() => navigate("../settings")}
-                    style={{ cursor: "pointer" }}
+                  <Tooltip
+                    label="Account"
+                    position="right-end"
+                    offset={5}
+                    withArrow
+                    arrowOffset={12}
                   >
-                    Name
-                  </Avatar>
+                    <Avatar
+                      color="teal"
+                      radius="xl"
+                      mt="xl"
+                      onClick={() => navigate("../settings")}
+                      style={{ cursor: "pointer" }}
+                    >
+                      Name
+                    </Avatar>
+                  </Tooltip>
                 </Center>
                 <Center mt="xl">
-                  <Button
-                    variant="light"
-                    color="red"
-                    size="compact-md"
-                    onClick={handleLogoutClick}
+                  <Tooltip
+                    label="Logout"
+                    position="right-end"
+                    offset={5}
+                    withArrow
+                    arrowOffset={12}
                   >
-                    <IconPower stroke={2} />
-                  </Button>
+                    <Button
+                      variant="light"
+                      color="red"
+                      size="compact-md"
+                      onClick={handleLogoutClick}
+                    >
+                      <IconPower stroke={2} />
+                    </Button>
+                  </Tooltip>
                 </Center>
               </AppShell.Section>
             </div>
