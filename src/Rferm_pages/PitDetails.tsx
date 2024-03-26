@@ -2,7 +2,7 @@ import React from "react";
 import { getTextColor } from "../components/utils";
 import { Text } from "@mantine/core";
 
-const PitDetails = ({ back }) => {
+const PitDetails: React.FC<{ back: string }> = ({ back }) => {
   return (
     <div>
       <Text ta="center" fw={800} fz="xl" td="underline" c={getTextColor(back)}>

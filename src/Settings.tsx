@@ -10,12 +10,12 @@ import {
 import React, { useEffect, useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { getTextColor } from "./components/utils";
-import { CircleCheck, AlertCircle } from "tabler-icons-react";
+import { CircleCheck } from "tabler-icons-react";
 import { notifications } from "@mantine/notifications";
 import Reset_pwd from "./components/common/Reset_pwd";
 import GetInTouch from "./components/common/GetInTouch";
 
-const Settings = ({ back }) => {
+const Settings: React.FC<{ back: string }> = ({ back }) => {
   const { setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme("light");
 
@@ -30,19 +30,16 @@ const Settings = ({ back }) => {
         : "linear-gradient(45deg, #e7f5ff, #4dabf7)", // Light mode gradient (blue to light blue)
     color: computedColorScheme === "dark" ? "#ffff" : "#000000",
   };
-  const [subscriptionStartDate, setSubscriptionStartDate] = useState(
-    new Date("2023-07-15")
-  );
-  const [subscriptionEndDate, setSubscriptionEndDate] = useState(
-    new Date("2023-08-15")
-  );
+  const [subscriptionStartDate] = useState(new Date("2023-07-15"));
+  const [subscriptionEndDate] = useState(new Date("2023-08-15"));
   const [daysRemaining, setDaysRemaining] = useState(0);
 
   const calculateDaysRemaining = () => {
     const currentTime = new Date();
-    const remaingTime = subscriptionEndDate - currentTime;
-    const remaingDays = Math.floor(remaingTime / (1000 * 60 * 60 * 24));
-    setDaysRemaining(remaingDays);
+    const endDate = new Date(subscriptionEndDate);
+    const remainingTime = endDate.getTime() - currentTime.getTime();
+    const remainingDays = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+    setDaysRemaining(remainingDays);
   };
   useEffect(() => {
     calculateDaysRemaining();

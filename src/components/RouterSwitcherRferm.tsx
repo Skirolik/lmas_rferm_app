@@ -4,10 +4,12 @@ import PitDetails from "../Rferm_pages/PitDetails";
 import Settings from "../Settings";
 import Maintenace from "../Maintenace";
 import Earthpit_data from "../Earthpit_data";
-import Login from "../Login";
+
 import { Routes, Route } from "react-router-dom";
-const RouterSwitcherRferm = ({ backcolor }) => {
-  console.log("backgrouind color in sitcher", backcolor);
+
+const RouterSwitcherRferm: React.FC<{ backcolor: string }> = ({
+  backcolor,
+}) => {
   return (
     <Routes>
       <Route path="/" element={<HomeRferm back={backcolor} />} />

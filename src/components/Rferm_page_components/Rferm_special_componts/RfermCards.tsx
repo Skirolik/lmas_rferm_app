@@ -1,18 +1,24 @@
 import { Group, Paper, SimpleGrid, Text } from "@mantine/core";
+import {
+  IconAlertTriangle,
+  IconHeartbeat,
+  IconFirstAidKit,
+  IconSum,
+} from "@tabler/icons-react";
 import React from "react";
 
-interface CardItem {
+interface DataItem {
+  description: string;
   title: string;
   value: string | number;
-  description: string;
 }
 
-interface LmasCardProps {
+interface IndividualCardProps {
   color: string;
-  data: CardItem;
+  data: DataItem;
 }
 
-const IndividualCard: React.FC<LmasCardProps> = ({ color, data }) => {
+const IndividualCard: React.FC<IndividualCardProps> = ({ color, data }) => {
   //   console.log("data for individual cards", data);
   if (!data) {
     return <Paper p="md">Loading...</Paper>; // Or a custom message
@@ -37,6 +43,23 @@ const IndividualCard: React.FC<LmasCardProps> = ({ color, data }) => {
             {data.value}
           </Text>
         )}
+        {data.title === "Danger" && (
+          <IconAlertTriangle
+            stroke={2}
+            width={40}
+            height={40}
+            color="#c51d31"
+          />
+        )}
+        {data.title === "Healthy" && (
+          <IconHeartbeat stroke={2} width={40} height={40} color="#24782c" />
+        )}
+        {data.title === "Un-Healthy" && (
+          <IconFirstAidKit stroke={2} width={40} height={40} color="#d14d14" />
+        )}
+        {data.title === "Total Pits" && (
+          <IconSum stroke={2} width={40} height={40} color="#1dbac5" />
+        )}
       </Group>
       <Group justify="flex-start">
         <Text ta="center" fw={700} tt="uppercase">
@@ -47,19 +70,18 @@ const IndividualCard: React.FC<LmasCardProps> = ({ color, data }) => {
   );
 };
 
-interface LmasDataProp {
-  data: CardItem[];
+interface RfermCardsProps {
+  data: DataItem[];
 }
 
-const CommonCards: React.FC<LmasDataProp> = ({ data }) => {
+const RfermCards: React.FC<RfermCardsProps> = ({ data }) => {
   if (!data) {
     return <p>Data is not available yet.</p>;
   }
   //   console.log("data in common cards", data);
-  const colors = ["#c51d31", "#d14d14", "#24782c", "#1dbac5", "#cf9a14"];
-
+  const colors = ["#c51d31", "#d14d14", "#24782c", "#1dbac5"];
   return (
-    <SimpleGrid cols={{ base: 1, xs: 2, md: 5 }}>
+    <SimpleGrid cols={{ base: 1, xs: 2, md: 4 }}>
       {colors.map((color, index) => (
         <IndividualCard key={index} color={color} data={data[index]} />
       ))}
@@ -67,4 +89,4 @@ const CommonCards: React.FC<LmasDataProp> = ({ data }) => {
   );
 };
 
-export default CommonCards;
+export default RfermCards;

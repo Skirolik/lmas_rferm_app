@@ -7,17 +7,14 @@ import {
   Center,
   Text,
   useMantineColorScheme,
-  useComputedColorScheme,
   Avatar,
   Image,
-  Flex,
   Drawer,
   Tooltip,
 } from "@mantine/core";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import {
-  IconSettings,
   IconDetails,
   IconHome,
   IconPower,
@@ -28,11 +25,14 @@ import {
 } from "@tabler/icons-react";
 import { getTextColor } from "../utils";
 
-export const NavbarRferm = ({ Onlogout, back }) => {
+export const NavbarRferm: React.FC<{ Onlogout: () => void; back: string }> = ({
+  Onlogout,
+  back,
+}) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const isLargeScreen = useMediaQuery("(min-width:800px");
-  const computedColorScheme = useComputedColorScheme("light");
+  const isLargeScreen = useMediaQuery("(min-width:1250px");
+  // const computedColorScheme = useComputedColorScheme("light");
   const { colorScheme } = useMantineColorScheme();
   const [opened, setOpened] = useState(false);
 

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import { Button, Popover, Paper, ColorSwatch, Text } from "@mantine/core";
+import { Popover, Paper, ColorSwatch, Text } from "@mantine/core";
 
-const Color_Swatch = ({ onSelect }) => {
+interface ColorSwatchProps {
+  onSelect: (color: string) => void; // Define the type of onSelect
+}
+
+const Color_Swatch: React.FC<ColorSwatchProps> = ({ onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const colors = [
@@ -33,19 +37,12 @@ const Color_Swatch = ({ onSelect }) => {
     "#D04437",
   ];
 
-  const handleColorSelect = (color) => {
+  const handleColorSelect = (color: string) => {
     onSelect(color);
     setIsOpen(false);
   };
   return (
-    <Popover
-      opened={isOpen}
-      onClose={() => setIsOpen(false)}
-      target={
-        <Button onClick={() => setIsOpen((prev) => !prev)}>Select Color</Button>
-      }
-      position="bottom"
-    >
+    <Popover opened={isOpen} onClose={() => setIsOpen(false)} position="bottom">
       <Text>Pick a Colour:</Text>
       <Paper mt="lg">
         <div

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   AppShell,
   Modal,
   Tooltip,
   useComputedColorScheme,
-  useMantineColorScheme,
 } from "@mantine/core";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { NavbarRferm } from "./components/navbars/NavbarRferm";
 import { NavbarLmas } from "./components/navbars/NavbarLmas";
 import { NavbarBoth } from "./components/navbars/NavbarBoth";
@@ -14,23 +13,24 @@ import RouterSwitcherRferm from "./components/RouterSwitcherRferm";
 import RouterSwitcherLmas from "./components/RouterSwitcherLmas";
 import RouterSwitcher from "./components/RouterSwitcher";
 import Login from "./Login";
+import "@mantine/charts/styles.css";
 import Color_Swatch from "./components/Color_Swatch";
 import { IconColorSwatch } from "@tabler/icons-react";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 
 const App = () => {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
-  const isLargeScreen = useMediaQuery("(min-width:800px");
+  const isLargeScreen = useMediaQuery("(min-width:1250px");
   const [user, setUser] = useState("");
-  const { setColorScheme } = useMantineColorScheme();
+
   const computedColorScheme = useComputedColorScheme("light");
-  const location = useLocation();
+
   const [backgroundColor, setBackgroundColor] = useState("#172B4d");
   const [modalOpened, setModalOpened] = useState(false);
   console.log("background color", backgroundColor);
 
-  const getTextColor = (bgColor) => {
+  const getTextColor = (bgColor: string) => {
     // Convert the background color to RGB
     const rgb = hexToRgb(bgColor);
     // Calculate brightness using a standard formula
@@ -39,7 +39,7 @@ const App = () => {
     return brightness > 128 ? "#000000" : "#FFFFFF";
   };
 
-  const hexToRgb = (hex) => {
+  const hexToRgb = (hex: string) => {
     // Remove the hash if it's present
     hex = hex.replace(/^#/, "");
     // Parse the hex values into RGB components
@@ -60,7 +60,7 @@ const App = () => {
     }
   }, [navigate]);
 
-  const handleLogin = (user) => {
+  const handleLogin = (user: string) => {
     setLoggedIn(true);
     setUser(user);
     localStorage.setItem("user", user);
@@ -79,6 +79,7 @@ const App = () => {
         padding="md"
         navbar={{
           width: isLargeScreen ? 80 : 0,
+          breakpoint: "",
         }}
       >
         {loggedIn && (

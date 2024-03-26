@@ -7,27 +7,26 @@ import {
   Center,
   Text,
   useMantineColorScheme,
-  useComputedColorScheme,
   Avatar,
   Image,
   Flex,
-  Burger,
   Drawer,
 } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import {
-  IconSettings,
   IconDetails,
   IconHome,
   IconPower,
   IconArrowBarRight,
 } from "@tabler/icons-react";
 
-export const NavbarBoth = ({ Onlogout }) => {
+export const NavbarBoth: React.FC<{ Onlogout: () => void }> = ({
+  Onlogout,
+}) => {
   const navigate = useNavigate();
   const isLargeScreen = useMediaQuery("(min-width:800px");
-  const computedColorScheme = useComputedColorScheme("light");
+
   const [opened, setOpened] = useState(false);
   const { colorScheme } = useMantineColorScheme();
   const handleLogoutClick = () => {

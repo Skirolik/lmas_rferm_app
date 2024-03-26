@@ -5,7 +5,6 @@ import {
   Anchor,
   Paper,
   Title,
-  Text,
   Container,
   Group,
   Button,
@@ -13,26 +12,94 @@ import {
   Flex,
 } from "@mantine/core";
 import React, { useState } from "react";
+import axios from "axios";
+import { notifications } from "@mantine/notifications";
 
-const Login = ({ onLogin }) => {
+interface LoginProps {
+  onLogin: (domainVersion: string) => void;
+}
+
+const Login: React.FC<LoginProps> = ({ onLogin }) => {
   console.log("login");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState("");
+  const [, setIsLoading] = useState(false);
 
-  const handleSignin = () => {
+  // Set the default base URL for Axios
+  axios.defaults.baseURL = import.meta.env.VITE_LOGIN_API_URL;
+
+  const handleSignin = async () => {
     console.log("singin clicked");
     console.log(userName);
     console.log(password);
     setIsLoading(true);
-    if (
-      (userName === "Rferm" || userName === "Lmas" || userName === "both") &&
-      password === "admin@123"
-    ) {
-      alert("Login Succesful");
-      onLogin(userName);
-    } else {
-      alert("Check credintials");
+    try {
+      const response = await axios.post(
+        "/login",
+        {
+          userName,
+          password,
+        },
+        {
+          withCredentials: true, // Include credentials (cookies) in cross-origin requests
+        }
+      );
+
+      console.log("response", response);
+
+      if (response.data.message === "Login successful") {
+        const {
+          userEmail,
+          userFirstname,
+          userLastname,
+          userCompany,
+          plantName,
+          domainVersion,
+          persona,
+          userStartDate,
+          userEndDate,
+        } = response.data.user;
+
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userEmail", userEmail); // Store the email in session storage
+        localStorage.setItem("userFirstname", userFirstname);
+        localStorage.setItem("userLastname", userLastname);
+        localStorage.setItem("userCompany", userCompany);
+        localStorage.setItem("plantName", plantName);
+        localStorage.setItem("user", domainVersion);
+        localStorage.setItem("persona", persona);
+        localStorage.setItem("userStartDate", userStartDate);
+        localStorage.setItem("userEndDate", userEndDate);
+
+        const abc = localStorage.getItem("user");
+        console.log("user", abc);
+
+        console.log(userEmail, userFirstname);
+
+        notifications.show({
+          title: "Login Success",
+          message: "Login Successful: Welcome back! ",
+          color: "teal",
+        });
+        onLogin(domainVersion);
+      } else {
+        setIsLoading(false);
+        // You can show an error message here or handle unsuccessful login
+        console.log("Invalid credentials");
+        notifications.show({
+          title: "Invalid Credentials",
+          message: "Please check your username and password.",
+          color: "Red",
+        });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      notifications.show({
+        title: "Request Failed",
+        message: "Sorry server not responding, please try again",
+        color: "Red",
+      });
+      console.error("Login failed:");
     }
   };
 
