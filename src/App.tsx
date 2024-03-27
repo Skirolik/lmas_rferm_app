@@ -21,8 +21,9 @@ import { useMediaQuery } from "@mantine/hooks";
 const App = () => {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
-  const isLargeScreen = useMediaQuery("(min-width:1250px");
+  const isLargeScreen = useMediaQuery("(min-width:1200px");
   const [user, setUser] = useState("");
+  const [navbarOpened] = useState(false);
 
   const computedColorScheme = useComputedColorScheme("light");
 
@@ -74,75 +75,70 @@ const App = () => {
   };
 
   return (
-    <div className="App" style={{ width: "100%" }}>
-      <AppShell
-        padding="md"
-        navbar={{
-          width: isLargeScreen ? 80 : 0,
-          breakpoint: "",
-        }}
-      >
-        {loggedIn && (
-          <>
-            {user === "Rferm" && (
-              <NavbarRferm Onlogout={handleLogout} back={backgroundColor} />
-            )}
-            {user === "Lmas" && (
-              <NavbarLmas Onlogout={handleLogout} back={backgroundColor} />
-            )}
-            {(user === "Rferm" || user === "Lmas") && (
-              <AppShell.Main
-                style={{
-                  background:
-                    computedColorScheme === "dark"
-                      ? `linear-gradient(to bottom, ${backgroundColor} 10%, #1e1e1e 60%)`
-                      : backgroundColor,
-                }}
-              >
-                <Tooltip label=" Select Color">
-                  <IconColorSwatch
-                    stroke={2}
-                    width={30}
-                    height={30}
-                    onClick={() => setModalOpened(true)}
-                    style={{
-                      cursor: "pointer",
-                      marginLeft: "20px",
-                      color: getTextColor(backgroundColor),
-                    }}
-                  />
-                </Tooltip>
-                <Modal
-                  opened={modalOpened}
-                  onClose={() => setModalOpened(false)}
-                >
-                  <Color_Swatch onSelect={setBackgroundColor} />
-                </Modal>
-                {user === "Rferm" && (
-                  <RouterSwitcherRferm backcolor={backgroundColor} />
-                )}
-                {user === "Lmas" && (
-                  <RouterSwitcherLmas backcolor={backgroundColor} />
-                )}
+    <AppShell
+      padding="md"
+      header={{ height: isLargeScreen ? 0 : 55 }}
+      navbar={{
+        width: 80,
+        breakpoint: "lg",
+        collapsed: { mobile: !navbarOpened },
+      }}
+    >
+      {loggedIn && (
+        <>
+          {user === "Rferm" && <NavbarRferm Onlogout={handleLogout} />}
+          {user === "Lmas" && (
+            <NavbarLmas Onlogout={handleLogout} back={backgroundColor} />
+          )}
+          {(user === "Rferm" || user === "Lmas") && (
+            <AppShell.Main
+              style={{
+                background:
+                  computedColorScheme === "dark"
+                    ? `linear-gradient(to bottom, ${backgroundColor} 10%, #1e1e1e 60%)`
+                    : backgroundColor,
+              }}
+            >
+              <Tooltip label=" Select Color">
+                <IconColorSwatch
+                  stroke={2}
+                  width={30}
+                  height={30}
+                  onClick={() => setModalOpened(true)}
+                  style={{
+                    cursor: "pointer",
+                    marginLeft: "20px",
+                    color: getTextColor(backgroundColor),
+                  }}
+                />
+              </Tooltip>
+              <Modal opened={modalOpened} onClose={() => setModalOpened(false)}>
+                <Color_Swatch onSelect={setBackgroundColor} />
+              </Modal>
+              {user === "Rferm" && (
+                <RouterSwitcherRferm backcolor={backgroundColor} />
+              )}
+              {user === "Lmas" && (
+                <RouterSwitcherLmas backcolor={backgroundColor} />
+              )}
+            </AppShell.Main>
+          )}
+          {user === "both" && (
+            <>
+              <NavbarBoth Onlogout={handleLogout} />
+              <AppShell.Main>
+                <RouterSwitcher />
               </AppShell.Main>
-            )}
-            {user === "both" && (
-              <>
-                <NavbarBoth Onlogout={handleLogout} />
-                <AppShell.Main>
-                  <RouterSwitcher />
-                </AppShell.Main>
-              </>
-            )}
-          </>
-        )}
-        {!loggedIn && (
-          <AppShell.Main>
-            <Login onLogin={handleLogin} />
-          </AppShell.Main>
-        )}
-      </AppShell>
-    </div>
+            </>
+          )}
+        </>
+      )}
+      {!loggedIn && (
+        <AppShell.Main>
+          <Login onLogin={handleLogin} />
+        </AppShell.Main>
+      )}
+    </AppShell>
   );
 };
 

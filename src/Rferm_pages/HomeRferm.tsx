@@ -18,7 +18,7 @@ const HomeRferm: React.FC<{ back: string }> = ({ back }) => {
         Welcome, {username || "Guest"}{" "}
       </Text>
       {persona === "pcc" && <PCC_user data={Rferm_home} back={back} />}
-      {persona === "scc" && <SCC_user />}
+      {persona === "scc" && <SCC_user data={Rferm_home} back={back} />}
       {persona === "ccc" && <CCC_user />}
     </div>
   );

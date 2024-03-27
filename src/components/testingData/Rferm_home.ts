@@ -29,5 +29,5 @@ export const Rferm_home = [{
     { Date: '17-03-2024', value: 11 },
     { Date: '18-03-2024', value: 15 },
     { Date: '19-03-2024', value: 2 },
-    { Date: '20-03-2024', value: 4 },]
+    { Date: '20-03-2024', value: 4 },{ Date: '21-03-2024', value: 4 },]
 }]

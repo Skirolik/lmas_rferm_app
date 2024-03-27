@@ -5,6 +5,8 @@ import "@mantine/charts/styles.css";
 import RecentActivity from "./Rferm_special_componts/RecentActivity";
 import PercentageCalculator from "./Rferm_special_componts/PercentageCalculator";
 import Grid_resistance_chart from "./Rferm_special_componts/Grid_resistance_chart";
+import { Map_data } from "../testingData/Map_data";
+import { Rferm_map } from "./Rferm_special_componts/Rferm_map";
 
 interface RfermHomeData {
   danger_count: number;
@@ -34,6 +36,7 @@ const PCC_user: React.FC<Props> = ({ data }) => {
     data[0];
 
   console.log("Grid Resistance", Grid_resistance);
+  localStorage.setItem("totalpits", total.toString());
 
   const totalData = [
     {
@@ -79,7 +82,7 @@ const PCC_user: React.FC<Props> = ({ data }) => {
         <Grid.Col span={{ base: 12, md: 5, lg: 5 }}>
           <Card>
             <Text ta="center" size="xl" fw={800}>
-              Recent Activity
+              Percentage Distribution
             </Text>
             <PercentageCalculator
               dangerCount={danger_count}
@@ -91,11 +94,21 @@ const PCC_user: React.FC<Props> = ({ data }) => {
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
       </Grid>
-      <Grid mt="xl" mb="xl">
+      <Grid mt="xl">
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
-        <Grid.Col span={{ base: 12, md: 5, lg: 10 }}>
+        <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
           <Card>
             <Grid_resistance_chart data={Grid_resistance} />
+          </Card>
+        </Grid.Col>
+
+        <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
+      </Grid>
+      <Grid mt="xl" mb="xl">
+        <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
+        <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
+          <Card>
+            <Rferm_map data={Map_data} />
           </Card>
         </Grid.Col>
 
