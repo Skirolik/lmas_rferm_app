@@ -22,4 +22,5 @@ export const Map_data = [{ lat: 17.7691132849, lon: 77.4073939, status: 'Danger'
     { lat: 22.680623, lon: 80.2146558, status: 'healthy',pit_name:'Pit-22' },
     { lat: 31.19019, lon: 73.689109, status: 'healthy',pit_name:'Pit-23' },
     {lat:22.497006291,lon:88.3560512,status:'healthy',pit_name:'Pit-24'},
-{ lat: 35.345529810, lon: 73.31622150, status: 'healthy',pit_name:'Pit-25' },]
+    { lat: 35.345529810, lon: 73.31622150, status: 'healthy', pit_name: 'Pit-25' },
+    { lat: 35.345529810, lon: 73.31622150, status: 'healthy', pit_name: 'Pit-25' }]
