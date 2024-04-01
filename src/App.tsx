@@ -68,7 +68,7 @@ const App = () => {
     navigate("/");
   };
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    localStorage.clear();
     setLoggedIn(false);
     setUser("");
     navigate("/login");
