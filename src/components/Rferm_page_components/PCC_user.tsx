@@ -35,7 +35,7 @@ const PCC_user: React.FC<Props> = ({ data }) => {
   const { danger_count, unhealthy_count, healthy, total, Grid_resistance } =
     data[0];
 
-  console.log("Grid Resistance", Grid_resistance);
+  console.log("Grid Resistance", Map_data);
   localStorage.setItem("totalpits", total.toString());
 
   const totalData = [
@@ -98,7 +98,7 @@ const PCC_user: React.FC<Props> = ({ data }) => {
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
         <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
           <Card>
-            <Grid_resistance_chart data={Grid_resistance} />
+            <Grid_resistance_chart data={Grid_resistance} color="#3A99FA" />
           </Card>
         </Grid.Col>
 

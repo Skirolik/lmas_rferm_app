@@ -7,11 +7,12 @@ interface ResistanceData {
   value: number;
 }
 
-const Grid_resistance_chart: React.FC<{ data: ResistanceData[] }> = ({
-  data,
-}) => {
-  console.log("Data in chart", data);
+interface GraphProp {
+  data: ResistanceData[];
+  color: string;
+}
 
+const Grid_resistance_chart: React.FC<GraphProp> = ({ data, color }) => {
   const computedColorScheme = useComputedColorScheme("light");
 
   const options = {
@@ -93,8 +94,23 @@ const Grid_resistance_chart: React.FC<{ data: ResistanceData[] }> = ({
         autoSelected: "zoom" as "zoom" | "selection" | "pan" | undefined,
       },
     },
+    colors: [color],
+
     dataLabels: {
       enabled: false,
+    },
+    xaxis: {
+      labels: {
+        style: {
+          colors: computedColorScheme === "dark" ? "#fff" : "000",
+        },
+      },
+      title: {
+        text: "Date",
+        style: {
+          color: computedColorScheme === "dark" ? "#fff" : "000",
+        },
+      },
     },
 
     yaxis: {
@@ -114,12 +130,10 @@ const Grid_resistance_chart: React.FC<{ data: ResistanceData[] }> = ({
 
   const series = [
     {
-      name: "Series 1",
+      name: "Resistance",
       data: data.map(({ Date, value }) => ({ x: Date, y: value })),
     },
   ];
-
-  console.log("series", series);
 
   return (
     <div>

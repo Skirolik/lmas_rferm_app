@@ -9,15 +9,13 @@ import {
   Popup,
 } from "react-map-gl";
 
-import NormalReadingGraph from "./NormalReadingGraph";
-
 import { useDisclosure } from "@mantine/hooks";
 import { useNavigate } from "react-router-dom";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1Ijoic2tpcm8iLCJhIjoiY2w1aTZjN2x2MDI3ODNkcHp0cnhuZzVicSJ9.HMjwHtHf_ttkh_aImSX-oQ";
 
-interface RfermMapData {
+interface DetailsMapData {
   lat: number;
   lon: number;
   status: string;
@@ -25,8 +23,8 @@ interface RfermMapData {
   mac_id: string;
 }
 
-export const Rferm_map: React.FC<{ data: RfermMapData[] }> = ({ data }) => {
-  const [selectedMarker, setSelectedMarker] = useState<RfermMapData | null>(
+const DetailsMap: React.FC<{ data: DetailsMapData[] }> = ({ data }) => {
+  const [selectedMarker, setSelectedMarker] = useState<DetailsMapData | null>(
     null
   );
   const [selectedMacId, setSelectedMacId] = useState<string | null>(null);
@@ -67,7 +65,6 @@ export const Rferm_map: React.FC<{ data: RfermMapData[] }> = ({ data }) => {
   useEffect(() => {
     console.log("selectedmacid", selectedMacId);
   }, [selectedMacId]);
-
   return (
     <div>
       <LazyLoad>
@@ -126,11 +123,8 @@ export const Rferm_map: React.FC<{ data: RfermMapData[] }> = ({ data }) => {
           )}
         </Map>
       </LazyLoad>
-      <Modal opened={opened} onClose={close} size="calc(100vw - 3rem)">
-        {persona == "pcc" && <NormalReadingGraph macid={selectedMacId} />}
-        {persona == "scc" && <Text>SCC</Text>}
-        {persona == "ccc" && <Text>CCC</Text>}
-      </Modal>
     </div>
   );
 };
+
+export default DetailsMap;

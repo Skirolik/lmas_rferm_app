@@ -11,7 +11,8 @@ import "@mantine/dates/styles.css";
 import { BrowserRouter } from "react-router-dom";
 
 const theme = createTheme({
-  fontFamily: "Open Sans, sans-serif",
+  fontFamily: "Verdana, sans-serif",
+  headings: { fontFamily: "Greycliff CF, sans-serif" },
 
   primaryColor: "teal",
 });

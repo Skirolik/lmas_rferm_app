@@ -13,6 +13,7 @@ import {
   IconWalk,
   IconHandFinger,
 } from "@tabler/icons-react";
+import LazyLoad from "react-lazy-load";
 
 import BatteryGauge from "react-battery-gauge";
 
@@ -26,13 +27,15 @@ interface RfermPit {
   ground_touch: number;
   lightning_step: number;
   lightning_touch: number;
+  mac_id: string;
 }
 
 interface RfermPitProps {
   pitData: RfermPit;
+  onClick: () => void;
 }
 
-const PitCard: React.FC<RfermPitProps> = ({ pitData }) => {
+const PitCard: React.FC<RfermPitProps> = ({ pitData, onClick }) => {
   const {
     pit_name,
     status,
@@ -77,126 +80,136 @@ const PitCard: React.FC<RfermPitProps> = ({ pitData }) => {
 
   return (
     <>
-      <Card withBorder p="xl" radius="lg" mt="xl" shadow="xl">
-        <Card.Section>
-          <Group justify="space-between" mt="sm" mb="lg">
-            <Title order={4} textWrap="wrap" ml="sm">
-              {pit_name}
-            </Title>
+      <LazyLoad>
+        <Card
+          withBorder
+          p="xl"
+          radius="lg"
+          mt="xl"
+          shadow="xl"
+          onClick={onClick}
+          style={{ cursor: "pointer" }}
+        >
+          <Card.Section>
+            <Group justify="space-between" mt="sm" mb="lg">
+              <Title order={4} textWrap="wrap" ml="sm">
+                {pit_name}
+              </Title>
 
-            <IconCircuitGround
-              stroke={2}
-              style={{
-                width: `40px`, // Adjust width as needed
-                height: `40px`, // Adjust height as needed
-                borderRadius: "50%", // Make the container circular
-                backgroundColor: resistanceColor(status), // Apply the specified background color
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            />
-          </Group>
-        </Card.Section>
-        <Card.Section>
-          <Group justify="space-between" mt="sm" mb="lg">
-            <BatteryGauge
-              value={battery}
-              size={60}
-              customization={{
-                batteryBody: {
-                  fill: computedColorScheme == "dark" ? "#2E2E2E" : "white",
-                  strokeColor: "black",
-                  strokeWidth: 2,
-                },
-                batteryMeter: {
-                  fill: gaugeColor(battery),
-                },
-                readingText: {
-                  darkContrastColor: "black",
-                  fontFamily: "Arial",
-                  fontSize: 18,
-                  lightContrastColor:
-                    computedColorScheme == "dark" ? "white" : "black",
-                  lowBatteryColor: "red",
-                },
-              }}
-            />
-            <Group>
-              <IconBolt stroke={2} color={faultColor(fault_count)} />
-              <Text>{fault_count}</Text>
+              <IconCircuitGround
+                stroke={2}
+                style={{
+                  width: `40px`, // Adjust width as needed
+                  height: `40px`, // Adjust height as needed
+                  borderRadius: "50%", // Make the container circular
+                  backgroundColor: resistanceColor(status), // Apply the specified background color
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              />
             </Group>
+          </Card.Section>
+          <Card.Section>
+            <Group justify="space-between" mt="sm" mb="lg">
+              <BatteryGauge
+                value={battery}
+                size={60}
+                customization={{
+                  batteryBody: {
+                    fill: computedColorScheme == "dark" ? "#2E2E2E" : "white",
+                    strokeColor: "black",
+                    strokeWidth: 2,
+                  },
+                  batteryMeter: {
+                    fill: gaugeColor(battery),
+                  },
+                  readingText: {
+                    darkContrastColor: "black",
+                    fontFamily: "Arial",
+                    fontSize: 18,
+                    lightContrastColor:
+                      computedColorScheme == "dark" ? "white" : "black",
+                    lowBatteryColor: "red",
+                  },
+                }}
+              />
+              <Group>
+                <IconBolt stroke={2} color={faultColor(fault_count)} />
+                <Text>{fault_count}</Text>
+              </Group>
 
-            <Text>{latest}Ω</Text>
-          </Group>
-        </Card.Section>
-        <Card.Section>
-          <Group justify="space-between">
-            <Flex
-              mih={50}
-              gap="md"
-              justify="center"
-              align="center"
-              direction="column"
-              wrap="wrap"
-            >
-              <Text c="red">Ground(v)</Text>
+              <Text>{latest}Ω</Text>
+            </Group>
+          </Card.Section>
+          <Card.Section>
+            <Group justify="space-between">
               <Flex
-                justify="space-between"
+                mih={50}
                 gap="md"
-                direction="row"
-                wrap="wrap"
+                justify="center"
                 align="center"
+                direction="column"
+                wrap="wrap"
               >
-                <IconWalk stroke={2} />
+                <Text c="red">Ground(v)</Text>
+                <Flex
+                  justify="space-between"
+                  gap="md"
+                  direction="row"
+                  wrap="wrap"
+                  align="center"
+                >
+                  <IconWalk stroke={2} />
 
-                <IconHandFinger stroke={2} />
+                  <IconHandFinger stroke={2} />
+                </Flex>
+                <Flex
+                  justify="space-between"
+                  gap="md"
+                  direction="row"
+                  wrap="wrap"
+                  align="center"
+                >
+                  <Text>{ground_step}</Text>
+                  <Text>{ground_touch}</Text>
+                </Flex>
               </Flex>
               <Flex
-                justify="space-between"
+                mih={50}
                 gap="md"
-                direction="row"
-                wrap="wrap"
+                justify="center"
                 align="center"
-              >
-                <Text>{ground_step}</Text>
-                <Text>{ground_touch}</Text>
-              </Flex>
-            </Flex>
-            <Flex
-              mih={50}
-              gap="md"
-              justify="center"
-              align="center"
-              direction="column"
-              wrap="wrap"
-            >
-              <Text c="red">Lightning(v)</Text>
-              <Flex
-                justify="space-between"
-                gap="md"
-                direction="row"
+                direction="column"
                 wrap="wrap"
-                align="center"
               >
-                <IconWalk stroke={2} />
+                <Text c="red">Lightning(v)</Text>
+                <Flex
+                  justify="space-between"
+                  gap="md"
+                  direction="row"
+                  wrap="wrap"
+                  align="center"
+                >
+                  <IconWalk stroke={2} />
 
-                <IconHandFinger stroke={2} />
+                  <IconHandFinger stroke={2} />
+                </Flex>
+                <Flex
+                  justify="space-between"
+                  gap="md"
+                  direction="row"
+                  wrap="wrap"
+                  align="center"
+                >
+                  <Text>{lightning_step}</Text>
+                  <Text>{lightning_touch}</Text>
+                </Flex>
               </Flex>
-              <Flex
-                justify="space-between"
-                gap="md"
-                direction="row"
-                wrap="wrap"
-                align="center"
-              >
-                <Text>{lightning_step}</Text>
-                <Text>{lightning_touch}</Text>
-              </Flex>
-            </Flex>
-          </Group>
-        </Card.Section>
-      </Card>
+            </Group>
+          </Card.Section>
+        </Card>
+      </LazyLoad>
     </>
   );
 };
