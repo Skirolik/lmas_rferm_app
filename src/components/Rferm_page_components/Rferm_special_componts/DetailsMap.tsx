@@ -1,4 +1,4 @@
-import { Button, Text, Modal } from "@mantine/core";
+import { Button, Text } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import LazyLoad from "react-lazy-load";
 import {
@@ -8,9 +8,6 @@ import {
   NavigationControl,
   Popup,
 } from "react-map-gl";
-
-import { useDisclosure } from "@mantine/hooks";
-import { useNavigate } from "react-router-dom";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1Ijoic2tpcm8iLCJhIjoiY2w1aTZjN2x2MDI3ODNkcHp0cnhuZzVicSJ9.HMjwHtHf_ttkh_aImSX-oQ";
@@ -23,16 +20,15 @@ interface DetailsMapData {
   mac_id: string;
 }
 
-const DetailsMap: React.FC<{ data: DetailsMapData[] }> = ({ data }) => {
+const DetailsMap: React.FC<{
+  data: DetailsMapData[];
+  onPinClick: (macId: string) => void;
+}> = ({ data, onPinClick }) => {
   const [selectedMarker, setSelectedMarker] = useState<DetailsMapData | null>(
     null
   );
-  const [selectedMacId, setSelectedMacId] = useState<string | null>(null);
+  const [selectedMacId] = useState<string | null>(null);
 
-  const persona = localStorage.getItem("persona");
-
-  const [opened, { open, close }] = useDisclosure(false);
-  const navigate = useNavigate();
   const popupStyle = {
     // backgroundColor: "lightgray",
     padding: "12px",
@@ -53,13 +49,8 @@ const DetailsMap: React.FC<{ data: DetailsMapData[] }> = ({ data }) => {
   };
 
   const handleDetailsClick = (macId: string) => {
-    setSelectedMacId(macId);
+    onPinClick(macId);
     localStorage.setItem("selectedMacId", macId);
-    if (persona === "pcc") {
-      open();
-    } else {
-      navigate("/details");
-    }
   };
 
   useEffect(() => {
