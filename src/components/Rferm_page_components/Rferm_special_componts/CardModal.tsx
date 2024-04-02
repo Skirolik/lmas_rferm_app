@@ -15,6 +15,8 @@ import {
 import { DateInput } from "@mantine/dates";
 import { IconCloudDownload } from "@tabler/icons-react";
 import { CSVLink } from "react-csv";
+import Legned from "./Legned";
+import Fault_chart from "./Fault_chart";
 
 interface PitDeatails {
   pit_name: string;
@@ -98,12 +100,13 @@ const CardModal: React.FC<CardProps> = ({ pitData }) => {
             Normal Reading
           </Title>
           <Grid_resistance_chart data={resistance} color="#2E93fA" />
+          <Legned />
         </Card.Section>
         <Card.Section mt="xl">
           <Title order={3} ta="center" td="underline" mb="xl">
             Fault Reading
           </Title>
-          <Grid_resistance_chart data={resistance} color="#E91E63" />
+          <Fault_chart data={resistance} color="#E91E63" />
         </Card.Section>
         <Card.Section mt="xl">
           <Title order={3} ta="center" td="underline" mb="xl">

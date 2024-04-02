@@ -16,7 +16,7 @@ const PitDetails: React.FC<{ back: string }> = ({ back }) => {
       </Text>
       {persona == "pcc" && <PCC_details />}
       {persona == "scc" && <SCC_details back={back} />}
-      {persona == "ccc" && <CCC_details />}
+      {persona == "ccc" && <CCC_details back={back} />}
     </div>
   );
 };

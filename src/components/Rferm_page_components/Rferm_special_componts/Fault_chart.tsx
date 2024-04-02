@@ -12,7 +12,7 @@ interface GraphProp {
   color: string;
 }
 
-const Grid_resistance_chart: React.FC<GraphProp> = ({ data, color }) => {
+const Fault_chart: React.FC<GraphProp> = ({ data, color }) => {
   const computedColorScheme = useComputedColorScheme("light");
 
   const options = {
@@ -126,35 +126,6 @@ const Grid_resistance_chart: React.FC<GraphProp> = ({ data, color }) => {
         },
       },
     },
-
-    annotations: {
-      yaxis: [
-        {
-          y: 32,
-          y2: null,
-          strokeDashArray: 0,
-          borderColor: "red",
-          fillColor: "red",
-          opacity: 1,
-          offsetX: 1,
-          offsetY: 0,
-          width: "100%",
-          yAxisIndex: 0,
-        },
-        {
-          y: 10,
-          y2: null,
-          strokeDashArray: 0,
-          borderColor: "#FC8C0C",
-          fillColor: "#FC8C0C",
-          opacity: 1,
-          offsetX: 1,
-          offsetY: 0,
-          width: "100%",
-          yAxisIndex: 0,
-        },
-      ],
-    },
   };
 
   const series = [
@@ -163,7 +134,6 @@ const Grid_resistance_chart: React.FC<GraphProp> = ({ data, color }) => {
       data: data.map(({ Date, value }) => ({ x: Date, y: value })),
     },
   ];
-
   return (
     <div>
       <Chart options={options} series={series} type="area" height={350} />
@@ -171,4 +141,4 @@ const Grid_resistance_chart: React.FC<GraphProp> = ({ data, color }) => {
   );
 };
 
-export default Grid_resistance_chart;
+export default Fault_chart;

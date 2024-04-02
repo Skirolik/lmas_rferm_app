@@ -61,7 +61,12 @@ const Detials_table: React.FC<{ data: RfemDetailsTable[] }> = ({ data }) => {
         onChange={handlePageChange}
         total={Math.ceil(data.length / itemsPerPage)}
       />
-      <Modal opened={opened} onClose={close} size="calc(100vw - 3rem)">
+      <Modal
+        opened={opened}
+        onClose={close}
+        size="calc(100vw - 3rem)"
+        overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
+      >
         <Scc_details_modal macid={selectedMacId} />
       </Modal>
     </>

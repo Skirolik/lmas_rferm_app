@@ -7,6 +7,7 @@ import PercentageCalculator from "./Rferm_special_componts/PercentageCalculator"
 import Grid_resistance_chart from "./Rferm_special_componts/Grid_resistance_chart";
 import { Map_data } from "../testingData/Map_data";
 import { Rferm_map } from "./Rferm_special_componts/Rferm_map";
+import Legned from "./Rferm_special_componts/Legned";
 
 interface RfermHomeData {
   danger_count: number;
@@ -97,8 +98,13 @@ const PCC_user: React.FC<Props> = ({ data }) => {
       <Grid mt="xl">
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
         <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
-          <Card>
-            <Grid_resistance_chart data={Grid_resistance} color="#3A99FA" />
+          <Card withBorder radius="lg">
+            <Card.Section mt="xl">
+              <Grid_resistance_chart data={Grid_resistance} color="#3A99FA" />
+            </Card.Section>
+            <Card.Section mb="lg">
+              <Legned />
+            </Card.Section>
           </Card>
         </Grid.Col>
 

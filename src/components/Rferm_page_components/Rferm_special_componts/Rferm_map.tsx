@@ -126,7 +126,12 @@ export const Rferm_map: React.FC<{ data: RfermMapData[] }> = ({ data }) => {
           )}
         </Map>
       </LazyLoad>
-      <Modal opened={opened} onClose={close} size="calc(100vw - 3rem)">
+      <Modal
+        opened={opened}
+        onClose={close}
+        size="calc(100vw - 3rem)"
+        overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
+      >
         {persona == "pcc" && <NormalReadingGraph macid={selectedMacId} />}
         {persona == "scc" && <Text>SCC</Text>}
         {persona == "ccc" && <Text>CCC</Text>}

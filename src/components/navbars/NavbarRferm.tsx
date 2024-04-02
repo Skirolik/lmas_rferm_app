@@ -5,7 +5,6 @@ import {
   ScrollArea,
   Button,
   Center,
-  useMantineColorScheme,
   Avatar,
   Image,
   Drawer,
@@ -30,7 +29,7 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
   const { pathname } = useLocation();
   const isLargeScreen = useMediaQuery("(min-width:1200px");
   // const computedColorScheme = useComputedColorScheme("light");
-  const { colorScheme } = useMantineColorScheme();
+
   const [opened, setOpened] = useState(false);
 
   const handleLogoutClick = () => {
@@ -58,9 +57,9 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
         <Drawer
           opened={opened}
           onClose={toggleDrawer}
-          position="left"
-          padding="md"
           id="navigation"
+          size="xs"
+          overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
         >
           <AppShell.Section mt="lg"> </AppShell.Section>
           <AppShell.Section
@@ -130,9 +129,11 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
             />
             <NavLink
               key="users"
-              className={`NavLink-custom ${
-                colorScheme === "light" ? "light" : "dark"
-              }`}
+              style={{
+                color: pathname === "/users" ? "#087f5b" : "inherit",
+                backgroundColor:
+                  pathname === "/users" ? "rgba(8, 127, 91, 0.1)" : "inherit",
+              }}
               label={
                 <div style={{ textAlign: "center" }}>
                   <Tooltip
@@ -150,7 +151,7 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
                   </Tooltip>
                 </div>
               }
-              onClick={() => navigate("../details")}
+              onClick={() => navigate("../users")}
             />
             <NavLink
               key="Maintenance"
@@ -323,9 +324,11 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
           />
           <NavLink
             key="users"
-            className={`NavLink-custom ${
-              colorScheme === "light" ? "light" : "dark"
-            }`}
+            style={{
+              color: pathname === "/users" ? "#087f5b" : "inherit",
+              backgroundColor:
+                pathname === "/users" ? "rgba(8, 127, 91, 0.1)" : "inherit",
+            }}
             label={
               <div style={{ textAlign: "center" }}>
                 <Tooltip
@@ -343,7 +346,7 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
                 </Tooltip>
               </div>
             }
-            onClick={() => navigate("../details")}
+            onClick={() => navigate("../users")}
           />
           <NavLink
             key="Maintenance"

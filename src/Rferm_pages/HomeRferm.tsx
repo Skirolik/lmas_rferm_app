@@ -19,7 +19,7 @@ const HomeRferm: React.FC<{ back: string }> = ({ back }) => {
       </Text>
       {persona === "pcc" && <PCC_user data={Rferm_home} back={back} />}
       {persona === "scc" && <SCC_user data={Rferm_home} back={back} />}
-      {persona === "ccc" && <CCC_user />}
+      {persona === "ccc" && <CCC_user data={Rferm_home} back={back} />}
     </div>
   );
 };

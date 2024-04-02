@@ -1,6 +1,7 @@
 import { Normal_reading } from "../../testingData/Normal_reading";
-import { Card, Group, Title } from "@mantine/core";
+import { Card, Grid, Group, Title } from "@mantine/core";
 import Grid_resistance_chart from "./Grid_resistance_chart";
+import Legned from "./Legned";
 
 const NormalReadingGraph = ({ macid }: { macid: string | null }) => {
   console.log("normal Reading", macid);
@@ -11,18 +12,27 @@ const NormalReadingGraph = ({ macid }: { macid: string | null }) => {
       <Title order={2} ta="center" td="underline">
         Details:
       </Title>
-      <Card p="xl" mt="xl">
-        <Card.Section>
-          <Group justify="space-between">
-            <Title order={3}>Pit Name : {pit_name}</Title>
-            <Title order={3}>Current Status: {current_status}</Title>
-            <Title order={3}>Latest Reading: {latest_reading} Ω</Title>
-          </Group>
-        </Card.Section>
-        <Card.Section mt="xl">
-          <Grid_resistance_chart data={resistance} color="#E91E63" />
-        </Card.Section>
-      </Card>
+      <Grid mt="xl" mb="xl">
+        <Grid.Col span={{ span: 12, md: 0.5, lg: 0.5 }}></Grid.Col>
+        <Grid.Col span={{ span: 12, md: 11, lg: 11 }}>
+          <Card p="xl" mt="xl" withBorder radius="lg">
+            <Card.Section>
+              <Group justify="space-between">
+                <Title order={3}>Pit Name : {pit_name}</Title>
+                <Title order={3}>Current Status: {current_status}</Title>
+                <Title order={3}>Latest Reading: {latest_reading} Ω</Title>
+              </Group>
+            </Card.Section>
+            <Card.Section mt="xl">
+              <Grid_resistance_chart data={resistance} color="#3A99FA" />
+            </Card.Section>
+            <Card.Section>
+              <Legned />
+            </Card.Section>
+          </Card>
+        </Grid.Col>
+        <Grid.Col span={{ span: 12, md: 0.5, lg: 0.5 }}></Grid.Col>
+      </Grid>
     </>
   );
 };

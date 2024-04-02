@@ -93,7 +93,7 @@ const SCC_user: React.FC<SccProps> = ({ data }) => {
       <Grid mt="xl" mb="xl">
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
         <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
-          <Card>
+          <Card withBorder radius="lg">
             <Rferm_map data={Map_data} />
           </Card>
         </Grid.Col>
