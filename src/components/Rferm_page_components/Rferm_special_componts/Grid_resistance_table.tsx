@@ -1,15 +1,13 @@
 import { Card, Grid, Pagination, Table } from "@mantine/core";
 import React, { useState } from "react";
 
-interface UserTableProp {
-  name: string;
-  email: string;
-  status: string;
+interface GripTable {
+  Date: string;
+  value: number;
 }
 
-const UserTable: React.FC<{ data: UserTableProp[] }> = ({ data }) => {
-  console.log(data);
-
+const Grid_resistance_table: React.FC<{ data: GripTable[] }> = ({ data }) => {
+  console.log("Date", data);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -24,19 +22,24 @@ const UserTable: React.FC<{ data: UserTableProp[] }> = ({ data }) => {
       <Grid mt="xl">
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
         <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
-          <Card p="xl" withBorder radius="lg" shadow="xl">
-            <Table striped highlightOnHover withTableBorder withColumnBorders>
+          <Card withBorder radius="lg" shadow="xl">
+            <Table
+              striped
+              highlightOnHover
+              withTableBorder
+              withColumnBorders
+              withRowBorders
+              mt="xl"
+            >
               <Table.Thead>
-                <Table.Th>Name</Table.Th>
-                <Table.Th>Email</Table.Th>
-                <Table.Th>Status</Table.Th>
+                <Table.Th>Date</Table.Th>
+                <Table.Th>Resistance</Table.Th>
               </Table.Thead>
               <Table.Tbody>
                 {paginatedData.map((item, index) => (
                   <Table.Tr key={index}>
-                    <Table.Td>{item.name}</Table.Td>
-                    <Table.Td>{item.email}</Table.Td>
-                    <Table.Td>{item.status}</Table.Td>
+                    <Table.Td>{item.Date}</Table.Td>
+                    <Table.Td>{item.value}</Table.Td>
                   </Table.Tr>
                 ))}
               </Table.Tbody>
@@ -55,4 +58,4 @@ const UserTable: React.FC<{ data: UserTableProp[] }> = ({ data }) => {
   );
 };
 
-export default UserTable;
+export default Grid_resistance_table;

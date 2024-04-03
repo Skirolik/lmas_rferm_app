@@ -65,7 +65,7 @@ const SCC_details: React.FC<{ back: string }> = ({ back }) => {
       <Grid mt="xl">
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
         <Grid.Col span={{ base: 12, md: 5, lg: 5 }}>
-          <Card>
+          <Card withBorder radius="lg" shadow="xl">
             <DetailsMap data={Map_data} onPinClick={handlePinClick} />
           </Card>
         </Grid.Col>
@@ -82,7 +82,7 @@ const SCC_details: React.FC<{ back: string }> = ({ back }) => {
           <Grid mt="xl">
             <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
             <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
-              <Card>
+              <Card withBorder radius="lg" shadow="xl">
                 <Title order={4} td="underline" mb="xl" mt="lg">
                   Danger Pit Data:
                 </Title>
@@ -94,7 +94,7 @@ const SCC_details: React.FC<{ back: string }> = ({ back }) => {
           <Grid>
             <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
             <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
-              <Card>
+              <Card withBorder radius="lg" shadow="xl">
                 <Title order={4} td="underline" mb="xl" mt="lg">
                   Unhealthy Pit Data:
                 </Title>
@@ -106,7 +106,7 @@ const SCC_details: React.FC<{ back: string }> = ({ back }) => {
           <Grid>
             <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
             <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
-              <Card>
+              <Card withBorder radius="lg" shadow="xl">
                 <Title order={4} td="underline" mb="xl" mt="lg">
                   Healthy Pit Data:
                 </Title>

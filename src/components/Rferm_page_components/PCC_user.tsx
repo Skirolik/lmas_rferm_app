@@ -73,7 +73,7 @@ const PCC_user: React.FC<Props> = ({ data }) => {
       <Grid mt="xl">
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
         <Grid.Col span={{ base: 12, md: 5, lg: 5 }}>
-          <Card>
+          <Card withBorder radius="lg">
             <Text ta="center" size="xl" fw={800}>
               Recent Activity
             </Text>
@@ -81,7 +81,7 @@ const PCC_user: React.FC<Props> = ({ data }) => {
           </Card>
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 5, lg: 5 }}>
-          <Card>
+          <Card withBorder radius="lg" shadow="lg">
             <Text ta="center" size="xl" fw={800}>
               Percentage Distribution
             </Text>
@@ -98,7 +98,7 @@ const PCC_user: React.FC<Props> = ({ data }) => {
       <Grid mt="xl">
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
         <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
-          <Card withBorder radius="lg">
+          <Card withBorder radius="lg" shadow="xl">
             <Card.Section mt="xl">
               <Grid_resistance_chart data={Grid_resistance} color="#3A99FA" />
             </Card.Section>
@@ -113,7 +113,7 @@ const PCC_user: React.FC<Props> = ({ data }) => {
       <Grid mt="xl" mb="xl">
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
         <Grid.Col span={{ base: 12, md: 10, lg: 10 }}>
-          <Card>
+          <Card withBorder radius="lg" shadow="xl">
             <Rferm_map data={Map_data} />
           </Card>
         </Grid.Col>

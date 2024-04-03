@@ -3,6 +3,8 @@ import { Text } from "@mantine/core";
 import { getTextColor } from "../components/utils";
 import UserTable from "../components/Rferm_page_components/Rferm_special_componts/UserTable";
 import { UserDetails } from "../components/testingData/UserDetails";
+import Grid_resistance_table from "../components/Rferm_page_components/Rferm_special_componts/Grid_resistance_table";
+import { GridData } from "../components/testingData/GridData";
 
 const RfermUsers: React.FC<{ back: string }> = ({ back }) => {
   const username = localStorage.getItem("userFirstname");
@@ -14,7 +16,7 @@ const RfermUsers: React.FC<{ back: string }> = ({ back }) => {
         Check out the Details, {username || "Guest"}
       </Text>
 
-      {persona == "pcc" && <Text>hi PCC</Text>}
+      {persona == "pcc" && <Grid_resistance_table data={GridData} />}
       {persona == "scc" && <UserTable data={UserDetails} />}
       {persona == "ccc" && <UserTable data={UserDetails} />}
     </div>

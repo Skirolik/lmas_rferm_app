@@ -15,7 +15,7 @@ const NormalReadingGraph = ({ macid }: { macid: string | null }) => {
       <Grid mt="xl" mb="xl">
         <Grid.Col span={{ span: 12, md: 0.5, lg: 0.5 }}></Grid.Col>
         <Grid.Col span={{ span: 12, md: 11, lg: 11 }}>
-          <Card p="xl" mt="xl" withBorder radius="lg">
+          <Card p="xl" mt="xl" withBorder radius="lg" shadow="xl">
             <Card.Section>
               <Group justify="space-between">
                 <Title order={3}>Pit Name : {pit_name}</Title>

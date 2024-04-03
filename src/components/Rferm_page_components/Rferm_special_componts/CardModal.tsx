@@ -65,7 +65,7 @@ const CardModal: React.FC<CardProps> = ({ pitData }) => {
       <Title order={2} ta="center" td="underline">
         Details:
       </Title>
-      <Card p="xl" mt="xl">
+      <Card p="xl" mt="xl" withBorder radius="lg" shadow="xl">
         <Card.Section>
           <Group justify="space-between">
             <Title order={3}>Pit Name : {pit_name}</Title>
