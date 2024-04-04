@@ -79,7 +79,7 @@ const RfermCards: React.FC<RfermCardsProps> = ({ data }) => {
     return <p>Data is not available yet.</p>;
   }
   //   console.log("data in common cards", data);
-  const colors = ["#c51d31", "#d14d14", "#24782c", "#1dbac5"];
+  const colors = ["#E60000", "#FF6A1A", "#00B34D", "#1dbac5"];
   return (
     <SimpleGrid cols={{ base: 1, xs: 2, md: 4 }}>
       {colors.map((color, index) => (

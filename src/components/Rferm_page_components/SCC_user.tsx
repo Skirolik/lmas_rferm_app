@@ -68,7 +68,7 @@ const SCC_user: React.FC<SccProps> = ({ data }) => {
       <Grid mt="xl">
         <Grid.Col span={{ base: 12, md: 1, lg: 1 }}></Grid.Col>
         <Grid.Col span={{ base: 12, md: 5, lg: 5 }}>
-          <Card withBorder radius="lg" shadow="xl">
+          <Card withBorder radius="lg">
             <Text ta="center" size="xl" fw={800}>
               Recent Activity
             </Text>
@@ -78,7 +78,7 @@ const SCC_user: React.FC<SccProps> = ({ data }) => {
         <Grid.Col span={{ base: 12, md: 5, lg: 5 }}>
           <Card withBorder radius="lg" shadow="lg">
             <Text ta="center" size="xl" fw={800}>
-              Recent Activity
+              Percentage Distribution
             </Text>
             <PercentageCalculator
               dangerCount={danger_count}

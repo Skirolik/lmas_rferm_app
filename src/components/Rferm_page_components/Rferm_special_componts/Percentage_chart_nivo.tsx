@@ -17,9 +17,9 @@ const Percentage_chart_nivo: React.FC<PercentageChartNivoProps> = ({
   data,
 }) => {
   const customColors: CustomColors = {
-    Danger: "#c51d31",
-    Unhealthy: "#d14d14",
-    Healthy: "#24782c",
+    Danger: "#E60000",
+    Unhealthy: "#FF6A1A",
+    Healthy: "#00B34D",
   };
 
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Paper, Text } from "@mantine/core";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -27,13 +27,20 @@ interface RecentActivityProps {
 const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
   console.log("data in recent activity", data);
 
+  const [count, SetCount] = useState(0);
+
+  // const handleCount = () => {
+  //   console.log("we in count");
+  //   SetCount(count + 1);
+  // };
+
   const linkStyles = {
     color: "#206AD2",
     textDecoration: "underline",
   };
 
   return (
-    <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+    <div style={{ minHeight: "400px", maxHeight: "400px", overflowY: "auto" }}>
       {Object.entries(data[0]).map(([key, value]) => {
         if (
           typeof value === "object" &&
@@ -42,14 +49,22 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
           value.area
         ) {
           return (
-            <Paper key={key} p="md" radius="md" mt="sm" bg="transparent">
-              <Text mt="lg" size="xl" ml="sm">
-                On {value.date}, {value.status} occurred in :{" "}
-                <RouterLink to="/details" style={linkStyles} className="link">
-                  {value.area}
-                </RouterLink>
-              </Text>
-            </Paper>
+            <>
+              {value.status === "none" ? null : (
+                <Paper key={key} p="md" radius="md" bg="transparent">
+                  <Text size="xl" ml="sm">
+                    On {value.date}, {value.status} occurred in :{" "}
+                    <RouterLink
+                      to="/details"
+                      style={linkStyles}
+                      className="link"
+                    >
+                      {value.area}
+                    </RouterLink>
+                  </Text>
+                </Paper>
+              )}
+            </>
           );
         } else {
           return null; // Skip non-object properties
