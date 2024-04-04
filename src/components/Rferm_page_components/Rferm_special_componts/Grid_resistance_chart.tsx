@@ -53,12 +53,7 @@ const Grid_resistance_chart: React.FC<GraphProp> = ({ data, color }) => {
         offsetY: 0,
       },
     },
-    legend: {
-      show: true,
-      labels: {
-        colors: "yellow",
-      },
-    },
+
     markers: {
       size: 2,
       colors: undefined,
