@@ -5,7 +5,8 @@ import {
   IconFirstAidKit,
   IconSum,
 } from "@tabler/icons-react";
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface DataItem {
   description: string;
@@ -19,16 +20,44 @@ interface IndividualCardProps {
 }
 
 const IndividualCard: React.FC<IndividualCardProps> = ({ color, data }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
   //   console.log("data for individual cards", data);
   if (!data) {
     return <Paper p="md">Loading...</Paper>; // Or a custom message
   }
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const handleMouseClick = () => {
+    if (data.title === "Total Pits") {
+      navigate(`/details`);
+    } else {
+      localStorage.setItem("cardname", data.title);
+      navigate(`/details`);
+    }
+  };
   return (
     <Paper
       withBorder
       p="md"
       radius="md"
-      style={{ borderLeft: `6px solid ${color}` }}
+      style={{
+        borderLeft: `6px solid ${color}`,
+        transform: isHovered ? "scale(1.05)" : "scale(1)",
+        transition: "transform 0.8s ease",
+        boxShadow: isHovered ? `0px 0px 40px ${color && `${color}4D`}` : "none",
+        cursor: "pointer",
+      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleMouseClick}
     >
       <Text c="dimmed" fw={700} size="md">
         {data.description}
@@ -39,7 +68,17 @@ const IndividualCard: React.FC<IndividualCardProps> = ({ color, data }) => {
             {data.value} %
           </Text>
         ) : (
-          <Text c={color} fw={700} size="xl" style={{ fontSize: "2.5rem" }}>
+          <Text
+            c={color}
+            fw={700}
+            size="xl"
+            style={{
+              fontSize: "2.5rem",
+              textShadow: isHovered
+                ? `2px 2px 4px ${color && `${color}4D`}`
+                : "none",
+            }}
+          >
             {data.value}
           </Text>
         )}
@@ -62,7 +101,14 @@ const IndividualCard: React.FC<IndividualCardProps> = ({ color, data }) => {
         )}
       </Group>
       <Group justify="flex-start">
-        <Text ta="center" fw={700} tt="uppercase">
+        <Text
+          ta="center"
+          fw={700}
+          tt="uppercase"
+          style={{
+            textShadow: isHovered ? "2px 2px 4px rgba(0, 0, 0, 0.4)" : "none",
+          }}
+        >
           {data.title}
         </Text>
       </Group>

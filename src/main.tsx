@@ -10,11 +10,15 @@ import "@mantine/charts/styles.css";
 import "@mantine/dates/styles.css";
 import { BrowserRouter } from "react-router-dom";
 
+const color = localStorage.getItem("color") || "teal";
+
+console.log("color in main", color);
+
 const theme = createTheme({
   fontFamily: "Verdana, sans-serif",
   headings: { fontFamily: "Greycliff CF, sans-serif" },
 
-  primaryColor: "teal",
+  primaryColor: color,
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

@@ -128,7 +128,7 @@ const CardModal: React.FC<CardProps> = ({ pitData }) => {
           <Table striped highlightOnHover withTableBorder withColumnBorders>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th>Id</Table.Th>
+                <Table.Th>Sr</Table.Th>
                 <Table.Th>Date</Table.Th>
                 <Table.Th>Resistance</Table.Th>
               </Table.Tr>

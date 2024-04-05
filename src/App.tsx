@@ -27,7 +27,12 @@ const App = () => {
 
   const computedColorScheme = useComputedColorScheme("light");
 
-  const [backgroundColor, setBackgroundColor] = useState("#172B4d");
+  const backGroundColorFromStorage = localStorage.getItem("selectedColor");
+  const defaultColor = "#172B4d";
+
+  const [backgroundColor, setBackgroundColor] = useState<string>(
+    backGroundColorFromStorage ? backGroundColorFromStorage : defaultColor
+  );
   const [modalOpened, setModalOpened] = useState(false);
   console.log("background color", backgroundColor);
 
@@ -57,7 +62,7 @@ const App = () => {
       setLoggedIn(true);
       setUser(storedUser);
     } else {
-      navigate("/login"); // Redirect to login page if user is not logged in
+      navigate("/"); // Redirect to login page if user is not logged in
     }
   }, [navigate]);
 
@@ -71,7 +76,7 @@ const App = () => {
     localStorage.clear();
     setLoggedIn(false);
     setUser("");
-    navigate("/login");
+    navigate("/");
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Grid,
   Modal,
@@ -30,12 +30,14 @@ interface SelectedPitStructure {
 
 const PCC_details = () => {
   const totalPitsString = localStorage.getItem("totalpits");
+  const cardName = localStorage.getItem("cardname");
+
   const totalPits = totalPitsString ? parseInt(totalPitsString, 10) : 0;
   const itemsPerPage = 12;
   const icon = <IconSearch stroke={2} />;
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedFilter, setSelectedFilter] = useState<string | null>("");
+  const [selectedFilter, setSelectedFilter] = useState<string | null>(cardName);
   const [searchValue, setSearchValue] = useState<string>("");
   const [searchResult, setSearchResult] = useState<SelectedPitStructure[]>([]);
   const [opened, { open, close }] = useDisclosure(false);
@@ -99,6 +101,12 @@ const PCC_details = () => {
     }
   });
 
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem("cardname");
+    };
+  }, []);
+
   return (
     <>
       <Grid mt="xl">
@@ -110,7 +118,7 @@ const PCC_details = () => {
                 { label: "All", value: "" },
                 { label: "Danger", value: "Danger" },
                 { label: "Unhealthy", value: "unhealthy" },
-                { label: "Healthy", value: "healthy" },
+                { label: "Healthy", value: "Healthy" },
                 { label: "Battery < 10", value: "lt10" },
                 { label: "Battery 10 - 50", value: "10to50" },
                 { label: "Battery > 50", value: "gt50" },

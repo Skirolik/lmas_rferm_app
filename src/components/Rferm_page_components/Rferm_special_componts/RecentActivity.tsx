@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Paper, Text } from "@mantine/core";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -27,8 +27,6 @@ interface RecentActivityProps {
 const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
   console.log("data in recent activity", data);
 
-  const [count, SetCount] = useState(0);
-
   // const handleCount = () => {
   //   console.log("we in count");
   //   SetCount(count + 1);
@@ -49,7 +47,7 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
           value.area
         ) {
           return (
-            <>
+            <div key={key}>
               {value.status === "none" ? null : (
                 <Paper key={key} p="md" radius="md" bg="transparent">
                   <Text size="xl" ml="sm">
@@ -64,7 +62,7 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
                   </Text>
                 </Paper>
               )}
-            </>
+            </div>
           );
         } else {
           return null; // Skip non-object properties

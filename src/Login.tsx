@@ -1,7 +1,6 @@
 import {
   TextInput,
   PasswordInput,
-  Checkbox,
   Anchor,
   Paper,
   Title,
@@ -10,20 +9,26 @@ import {
   Button,
   Image,
   Flex,
+  Modal,
+  rem,
 } from "@mantine/core";
 import React, { useState } from "react";
 import axios from "axios";
 import { notifications } from "@mantine/notifications";
+import { useDisclosure } from "@mantine/hooks";
+import ForgotPassword from "./ForgotPassword";
+import { IconAt } from "@tabler/icons-react";
 
 interface LoginProps {
   onLogin: (domainVersion: string) => void;
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
-  console.log("login");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [, setIsLoading] = useState(false);
+
+  const [opened, { open, close }] = useDisclosure(false);
 
   // Set the default base URL for Axios
   axios.defaults.baseURL = import.meta.env.VITE_LOGIN_API_URL;
@@ -103,6 +108,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     }
   };
 
+  const icon = <IconAt style={{ width: rem(16), height: rem(16) }} />;
+
   return (
     <div className="App" style={{ width: "100%" }}>
       <Container size={420} my={40}>
@@ -120,8 +127,9 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">
           <TextInput
-            label="Name"
-            placeholder="user Name"
+            label="Email"
+            placeholder="Xyz@xyz.com"
+            rightSection={icon}
             required
             onChange={(event) => setUserName(event.target.value)}
           />
@@ -133,8 +141,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             mt="md"
           />
           <Group justify="space-between" mt="lg">
-            <Checkbox label="Remember me" />
-            <Anchor component="button" size="sm">
+            {/* <Checkbox label="Remember me" /> */}
+            <Anchor component="button" size="sm" onClick={open}>
               Forgot password?
             </Anchor>
           </Group>
@@ -143,6 +151,17 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           </Button>
         </Paper>
       </Container>
+      <Modal
+        opened={opened}
+        onClose={close}
+        centered
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
+      >
+        <ForgotPassword />
+      </Modal>
     </div>
   );
 };

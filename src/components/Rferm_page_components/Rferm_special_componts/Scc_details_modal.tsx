@@ -1,8 +1,19 @@
 import { Normal_fault } from "../../testingData/Normal_fault";
-import { Button, Card, Group, Text, Title } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Flex,
+  Group,
+  Pagination,
+  Table,
+  Text,
+  Title,
+} from "@mantine/core";
 import Grid_resistance_chart from "./Grid_resistance_chart";
 import { useState } from "react";
 import { DateInput } from "@mantine/dates";
+import { IconCloudDownload } from "@tabler/icons-react";
+import { CSVLink } from "react-csv";
 
 const Scc_details_modal = ({ macid }: { macid: string | null }) => {
   const {
@@ -16,7 +27,38 @@ const Scc_details_modal = ({ macid }: { macid: string | null }) => {
   const handleToggleClick = () => {
     alert("Filter clicked");
   };
-  console.log("mac_id", macid);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPageFault, setCurrentPageFault] = useState(1);
+  const itemsPerPage = 10;
+  const startIndex = (currentPage - 1) * itemsPerPage + 1;
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
+  const endIndex = Math.min(
+    currentPage * itemsPerPage,
+    normal_resistance.length
+  );
+
+  const paginatedData = normal_resistance.slice(startIndex - 1, endIndex);
+
+  const handleFaultPageChange = (newPages: number) => {
+    setCurrentPageFault(newPages);
+  };
+
+  const endIndexFault = Math.min(
+    currentPageFault * itemsPerPage,
+    fault_resistance.length
+  );
+
+  const paginatedDataFault = fault_resistance.slice(
+    startIndex - 1,
+    endIndexFault
+  );
+
+  console.log("macid", macid);
   return (
     <>
       <Title order={2} ta="center" td="underline">
@@ -62,6 +104,84 @@ const Scc_details_modal = ({ macid }: { macid: string | null }) => {
           </Title>
           <Grid_resistance_chart data={fault_resistance} color="#E91E63" />
         </Card.Section>
+        <Card.Section mt="xl">
+          <Title order={3} ta="center" td="underline" mb="xl">
+            Normal Reading
+          </Title>
+          <Flex
+            mih={50}
+            gap="xl"
+            justify="flex-start"
+            align="flex-start"
+            direction="row-reverse"
+            wrap="nowrap"
+          >
+            <CSVLink data={normal_resistance} filename={`${pit_name}_data.csv`}>
+              <IconCloudDownload stroke={2} style={{ cursor: "pointer" }} />
+            </CSVLink>
+          </Flex>
+          <Table striped highlightOnHover withTableBorder withColumnBorders>
+            <Table.Thead>
+              <Table.Th>Sr</Table.Th>
+              <Table.Th>Date & Time</Table.Th>
+              <Table.Th>Resistance Ω</Table.Th>
+            </Table.Thead>
+            <Table.Tbody>
+              {paginatedData.map((item, index) => (
+                <Table.Tr key={index}>
+                  <Table.Td>{startIndex + index}</Table.Td>
+                  <Table.Td>{item.Date}</Table.Td>
+                  <Table.Td>{item.value} </Table.Td>
+                </Table.Tr>
+              ))}
+            </Table.Tbody>
+          </Table>
+        </Card.Section>
+        <Pagination
+          mt="lg"
+          value={currentPage}
+          onChange={handlePageChange}
+          total={Math.ceil(normal_resistance.length / itemsPerPage)}
+        />
+        <Card.Section mt="xl">
+          <Title order={3} ta="center" td="underline" mb="xl">
+            Fault Reading
+          </Title>
+          <Flex
+            mih={50}
+            gap="xl"
+            justify="flex-start"
+            align="flex-start"
+            direction="row-reverse"
+            wrap="nowrap"
+          >
+            <CSVLink data={fault_resistance} filename={`${pit_name}_data.csv`}>
+              <IconCloudDownload stroke={2} style={{ cursor: "pointer" }} />
+            </CSVLink>
+          </Flex>
+          <Table striped highlightOnHover withTableBorder withColumnBorders>
+            <Table.Thead>
+              <Table.Th>Sr</Table.Th>
+              <Table.Th>Date & Time</Table.Th>
+              <Table.Th>Resistance Ω</Table.Th>
+            </Table.Thead>
+            <Table.Tbody>
+              {paginatedDataFault.map((item, index) => (
+                <Table.Tr key={index}>
+                  <Table.Td>{startIndex + index}</Table.Td>
+                  <Table.Td>{item.Date}</Table.Td>
+                  <Table.Td>{item.value} </Table.Td>
+                </Table.Tr>
+              ))}
+            </Table.Tbody>
+          </Table>
+        </Card.Section>
+        <Pagination
+          mt="lg"
+          value={currentPageFault}
+          onChange={handleFaultPageChange}
+          total={Math.ceil(normal_resistance.length / itemsPerPage)}
+        />
       </Card>
     </>
   );

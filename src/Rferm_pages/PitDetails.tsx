@@ -8,6 +8,7 @@ import CCC_details from "../Rferm_details_page_componets/CCC_details";
 const PitDetails: React.FC<{ back: string }> = ({ back }) => {
   const username = localStorage.getItem("userFirstname");
   const persona = localStorage.getItem("persona");
+
   return (
     <div>
       <Text ta="center" fw={800} fz="xl" td="underline" c={getTextColor(back)}>

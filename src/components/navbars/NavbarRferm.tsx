@@ -30,6 +30,15 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
   const isLargeScreen = useMediaQuery("(min-width:1200px");
   // const computedColorScheme = useComputedColorScheme("light");
 
+  const name = localStorage.getItem("userFirstname") || "";
+  const lastName = localStorage.getItem("userLastname") || "";
+
+  console.log("name", lastName);
+
+  const firstNameInitial = name.charAt(0).toUpperCase();
+  const lastNameInitial = lastName.charAt(0).toUpperCase();
+  const initials = `${firstNameInitial}${lastNameInitial}`;
+
   const [opened, setOpened] = useState(false);
 
   const handleLogoutClick = () => {
@@ -214,7 +223,7 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
             <AppShell.Section mt="xl">
               <Center>
                 <Tooltip
-                  label="Account"
+                  label={name}
                   position="right-end"
                   offset={5}
                   withArrow
@@ -227,7 +236,7 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
                     onClick={() => navigate("../settings")}
                     style={{ cursor: "pointer" }}
                   >
-                    Name
+                    {initials}
                   </Avatar>
                 </Tooltip>
               </Center>
@@ -407,7 +416,7 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
           <AppShell.Section mt="xl">
             <Center>
               <Tooltip
-                label="Account"
+                label={name}
                 position="right-end"
                 offset={5}
                 withArrow
@@ -420,7 +429,7 @@ export const NavbarRferm: React.FC<{ Onlogout: () => void }> = ({
                   onClick={() => navigate("../settings")}
                   style={{ cursor: "pointer" }}
                 >
-                  Name
+                  {initials}
                 </Avatar>
               </Tooltip>
             </Center>
