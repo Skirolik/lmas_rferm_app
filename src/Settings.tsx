@@ -63,7 +63,7 @@ const Settings: React.FC<{ back: string }> = ({ back }) => {
   };
 
   const handleSelectColor = (color: string) => {
-    console.log("color", color);
+    // console.log("color", color);
     localStorage.setItem("color", color);
     window.location.reload();
   };
